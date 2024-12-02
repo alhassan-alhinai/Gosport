@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Sports Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgb(251,236,212);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .quiz-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 10px;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(124, 65, 65);
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: rgb(92, 75, 75);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="row" style=" background-color:rgb(251,236,212); height: fit-content;">
+        <div class="col-sm-1">
+            <a href="index.html"><img src="logo.jpeg" style="height: 100%; width: 100%;" alt="this is a picture of the site logo" title="home page" class="center"></a>
+            </div>
+        <div class="col-sm-10" >
+        <div class="container-fluid" ></div>
+        <nav class="navbar navbar-expand-sm  nav-justified" style="background-color:rgb(251,236,212);">
+          <ul class="navbar-nav">
+            <li ><a class="nav-link  active" href="index.html" style="font-family:'Times New Roman', Times, serif ">Home page</a></li>
+            <li ><a class="nav-link" href="Educationalresourse.html" style="font-family:'Times New Roman', Times, serif ";>Educational resources</a></li>
+            <li ><a class="nav-link" href="serves.html"  style="font-family:'Times New Roman', Times, serif ">Services</a></li>
+            <li ><a class="nav-link" href="calculation .html"  style="font-family:'Times New Roman', Times, serif ">calculation</a></li>
+            <li ><a class="nav-link" href="contactus.html"  style="font-family:'Times New Roman', Times, serif ">Contact Us</a></li>
+            <li ><a class="nav-link" href="aboutus.html" style="font-family:'Times New Roman', Times, serif ">About us</a></li>
+            <li ><a class="nav-link" href="signin.html"  style="font-family:'Times New Roman', Times, serif ">sign In</a></li>
+            <li ><a class="nav-link" href="Questionnaire.html"  style="font-family:'Times New Roman', Times, serif ">Questionnaire page</a></li>
+            <li ><a class="nav-link" href="funpage.html"  style="font-family:'Times New Roman', Times, serif ">fun page</a></li>
+        </ul>
+        </nav>
+        </div>
+
+    <h1>Sports Quiz Game</h1>
+    <div class="quiz-container" id="quizContainer">
+        <div class="question" id="question">Question will appear here</div>
+        <div id="options">
+            <!-- options will be created -->
+        </div>
+        <button onclick="nextQuestion()">next question</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // quiz data: is to show the questions with options and the correct answer
+        const quizData = [
+            {
+                question: "which country won the FIFA World Cup in 2018?",
+                options: ["france", "brazil", "germany", "argentina"],
+                correct: "france",
+            },
+            {
+                question: "How many players are there in a basketball team on the court?",
+                options: ["5", "7", "6", "11"],
+                correct: "5",
+            },
+            {
+                question: "what is the length of an olympic swimming pool?",
+                options: ["25 meters", "50 meters", "100 meters", "75 meters"],
+                correct: "50 meters",
+            },
+            {
+                question: "which sport uses a net, a shuttlecock, and rackets?",
+                options: ["tennis", "badminton", "squash", "volleyball"],
+                correct: "badminton",
+            },
+            {
+                question: "Who holds the record for the most goals scored in a single FIFA World Cup?",
+                options: ["pele", "miroslav klose", "just fontaine", "jionel messi"],
+                correct: "just Fontaine",
+            },
+        ];
+
+        let currentQuestionIndex = 0; // to know the current question
+        let score = 0; // to know the user score
+
+        // function to load the question
+        function loadQuestion() {
+            const quizContainer = document.getElementById("quizContainer");
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const resultElement = document.getElementById("result");
+
+            // clear previous result
+            resultElement.textContent = "";
+
+            // get the current question
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+
+            // clear previous options
+            optionsElement.innerHTML = "";
+
+            // create buttons for each option
+            currentQuestion.options.forEach((option) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option); // check the answer when clicked
+                optionsElement.appendChild(button);
+            });
+        }
+
+        // function to check the user answer
+        function checkAnswer(selectedOption) {
+            const currentQuestion = quizData[currentQuestionIndex];
+            const resultElement = document.getElementById("result");
+
+            if (selectedOption === currentQuestion.correct) {
+                score++; // increase score for correct answer
+                resultElement.textContent = "Correct!";
+                resultElement.style.color = "green";
+            } else {
+                resultElement.textContent = `Wrong! The correct answer is "${currentQuestion.correct}".`;
+                resultElement.style.color = "red";
+            }
+        }
+
+        // function to move to the next question
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion(); // load the next question
+            } else {
+                endQuiz(); // end the quiz if no more questions
+            }
+        }
+
+        // function to display the final score
+        function endQuiz() {
+            const quizContainer = document.getElementById("quizContainer");
+            quizContainer.innerHTML = `
+                <h2>Quiz Completed!</h2>
+                <p>Your final score is ${score} out of ${quizData.length}.</p>
+                <button onclick="restartQuiz()">Restart Quiz</button>
+            `;
+        }
+
+        // function to restart the quiz
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        // load the first question when the page loads
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
