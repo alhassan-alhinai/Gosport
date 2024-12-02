@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(251, 236, 212);
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row" style=" background-color:rgb(251,236,212); height: fit-content;">
+        <div class="col-sm-1">
+            <a href="index.html"><img src="logo.jpeg" style="height: 100%; width: 100%;" alt="this is a picture of the site logo" title="home page" class="center"></a>
+            </div>
+        <div class="col-sm-10" >
+        <div class="container-fluid" ></div>
+        <nav class="navbar navbar-expand-sm  nav-justified" style="background-color:rgb(251,236,212);">
+            <ul class="navbar-nav">
+                <li ><a class="nav-link  active" href="index.html" style="font-family:'Times New Roman', Times, serif ">Home page</a></li>
+                <li ><a class="nav-link" href="Educationalresourse.html" style="font-family:'Times New Roman', Times, serif ";>Educational resources</a></li>
+                <li ><a class="nav-link" href="serves.html"  style="font-family:'Times New Roman', Times, serif ">Services</a></li>
+                <li ><a class="nav-link" href="contactus.html"  style="font-family:'Times New Roman', Times, serif ">Contact Us</a></li>
+                <li ><a class="nav-link" href="aboutus.html" style="font-family:'Times New Roman', Times, serif ">About us</a></li>
+                <li ><a class="nav-link" href="signin.html"  style="font-family:'Times New Roman', Times, serif ">sign In</a></li>
+                <li ><a class="nav-link" href="Questionnaire page.html"  style="font-family:'Times New Roman', Times, serif ">Questionnaire page</a></li>
+            </ul>
+        </nav>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+        <h2 class="text-center">Customer Feedback Form</h2>
+        <form id="questionnaireForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="mb-3">
+                <label>Rate Our Service:</label><br>
+                <input type="radio" name="rating" value="Excellent" id="excellent"> Excellent
+                <input type="radio" name="rating" value="Good" id="good"> Good
+                <input type="radio" name="rating" value="Average" id="average"> Average
+                <input type="radio" name="rating" value="Poor" id="poor"> Poor
+                <div class="error" id="ratingError"></div>
+            </div>
+            <div class="mb-3">
+                <label for="feedback" class="form-label">Your Feedback:</label>
+                <textarea id="feedback" class="form-control" rows="4" placeholder="Write your feedback"></textarea>
+                <div class="error" id="feedbackError"></div>
+            </div>
+            <div class="mb-3">
+                <label for="subscribe">Subscribe to our newsletter:</label>
+                <input type="checkbox" id="subscribe">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-black" style="background-color: rgb(214, 176, 115); padding-top: 10px; padding-bottom: 10px;">
+        <div class="container">
+            <section>
+                <div class="row text-center d-flex justify-content-center">
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="#!" class="text-black">About us</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="#!" class="text-black">Products</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="#!" class="text-black">Awards</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="#!" class="text-black">Help</a>
+                        </h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a href="#!" class="text-black">Contact</a>
+                        </h6>
+                    </div>
+                </div>
+            </section>
+            <hr class="my-2" />
+            <section>
+                <p style="font-size: 14px; margin-top: 10px; margin-bottom: 10px;">
+                    Gosport is a great app for booking sports fields. The app offers a lot of options, from football and basketball to tennis and padel.
+                </p>
+            </section>
+        </div>
+    </footer>
+
+    <script>
+        // Form Validation
+        document.getElementById("questionnaireForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Name Validation
+            const name = document.getElementById("name").value.trim();
+            const nameError = document.getElementById("nameError");
+            nameError.textContent = "";
+            if (!name || name.length < 3) {
+                nameError.textContent = "Name must be at least 3 characters long.";
+                return;
+            }
+
+            // Email Validation
+            const email = document.getElementById("email").value.trim();
+            const emailError = document.getElementById("emailError");
+            emailError.textContent = "";
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.textContent = "Please enter a valid email address.";
+                return;
+            }
+
+            // Rating Validation
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const ratingError = document.getElementById("ratingError");
+            ratingError.textContent = "";
+            if (!rating) {
+                ratingError.textContent = "Please select a rating.";
+                return;
+            }
+
+            // Feedback Validation
+            const feedback = document.getElementById("feedback").value.trim();
+            const feedbackError = document.getElementById("feedbackError");
+            feedbackError.textContent = "";
+            if (feedback.length < 10) {
+                feedbackError.textContent = "Feedback must be at least 10 characters.";
+                return;
+            }
+
+            alert("Thank you for your feedback!");
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
